@@ -9,7 +9,7 @@ set(CMAKE_AUTOMOC ON)
 # create code from a list of Qt designer ui files
 set(CMAKE_AUTOUIC ON)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -W -msse3")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -W")
 
 if(APPLE)
     add_compile_definitions(Q_OS_MAC)
@@ -28,7 +28,7 @@ file(GLOB SRC_FILES ${PROJECT_SOURCE_DIR}/*.cpp
                     ${PROJECT_SOURCE_DIR}/tables/*.cpp
                     )
 
-qt5_add_resources(SHADER_RSC 
+qt5_add_resources(SHADER_RSC
     ${PROJECT_SOURCE_DIR}/shaders.qrc
     ${PROJECT_SOURCE_DIR}/images.qrc
     ${PROJECT_SOURCE_DIR}/fonts.qrc

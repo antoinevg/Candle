@@ -29,8 +29,8 @@ contains(QT_CONFIG, opengles.) {
 
 TARGET = Candle
 TEMPLATE = app
-VERSION = 1.1.8
-RC_ICONS += images/candle.ico
+VERSION = 1.2b
+RC_ICONS += images/candle.icns
 
 DEFINES += sNan=\"65536\"
 DEFINES += APP_VERSION=\\\"$$VERSION\\\"
@@ -111,4 +111,8 @@ RESOURCES += \
     shaders.qrc \
     images.qrc
 
-CONFIG += c++11
+CONFIG(release, debug|release) {
+    QMAKE_CXXFLAGS += -Z7 -Fdrelease\\candle.pdb
+    QMAKE_CFLAGS += -Z7 -Fdrelease\\candle.pdb
+    QMAKE_LFLAGS += /DEBUG /OPT:REF
+}
