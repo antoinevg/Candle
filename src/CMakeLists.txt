@@ -14,7 +14,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -W -DsNan=\"65536\"")
 if(APPLE)
     add_compile_definitions(Q_OS_MAC)
 endif()
-add_compile_definitions(APP_VERSION="1.1.9")
+add_compile_definitions(APP_VERSION="1.2c")
 add_compile_definitions(QT_NO_DEBUG)
 
 find_package(Qt5 COMPONENTS Core Widgets OpenGL SerialPort REQUIRED)
@@ -35,7 +35,12 @@ qt5_add_resources(SHADER_RSC
     )
 
 if(APPLE)
-    add_executable(Candle MACOSX_BUNDLE ${SRC_FILES} ${SHADER_RSC})
+    set(MACOSX_BUNDLE_ICON_FILE candle.icns)
+
+    set(MACOSX_BUNDLE_ICON_LOCATION ${PROJECT_SOURCE_DIR}/images/candle.icns)
+    set_source_files_properties(${MACOSX_BUNDLE_ICON_LOCATION} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
+
+    add_executable(Candle MACOSX_BUNDLE ${SRC_FILES} ${SHADER_RSC} ${MACOSX_BUNDLE_ICON_LOCATION})
     set_target_properties(Candle PROPERTIES MACOSX_BUNDLE_INFO_PLIST ${PROJECT_SOURCE_DIR}/Info.plist)
 else()
     add_executable(Candle ${SRC_FILES} ${SHADER_RSC})
